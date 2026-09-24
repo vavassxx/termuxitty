@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!DOCTYPE resources [
-    <!ENTITY TERMUX_PACKAGE_NAME "com.termux">
+    <!ENTITY TERMUX_PACKAGE_NAME "com.ttymux">
     <!ENTITY TERMUX_APP_NAME "Termuxitty">
     <!ENTITY TERMUX_API_APP_NAME "Termux:API">
     <!ENTITY TERMUX_BOOT_APP_NAME "Termux:Boot">
@@ -53,11 +53,6 @@
     <string name="action_create_named_session_confirm">Create</string>
 
     <string name="action_toggle_soft_keyboard">Keyboard</string>
-    <string name="action_run_command">Run command</string>
-    <string name="title_run_command">Run in current session</string>
-    <string name="action_run_command_confirm">Run</string>
-    <string name="termuxitty_session_status_unknown">No active session</string>
-    <string name="termuxitty_session_status">Session %1$d · PID %2$d\\n%3$s</string>
 
     <string name="msg_enabling_terminal_toolbar">Enabling Terminal Toolbar</string>
     <string name="msg_disabling_terminal_toolbar">Disabling Terminal Toolbar</string>

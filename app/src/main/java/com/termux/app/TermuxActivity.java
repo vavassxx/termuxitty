@@ -250,8 +250,6 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
         setNewSessionButtonView();
 
         setToggleKeyboardView();
-        setRunCommandView();
-        setDrawerStatusView();
 
         registerForContextMenu(mTerminalView);
 
@@ -599,59 +597,6 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
 
 
 
-
-    private void setRunCommandView() {
-        findViewById(R.id.run_command_button).setOnClickListener(v -> {
-            final EditText input = new EditText(this);
-            input.setSingleLine(false);
-            input.setHint("e.g. pacman -Q | head");
-            input.setSelectAllOnFocus(false);
-            input.setPadding(32, 16, 32, 16);
-
-            new AlertDialog.Builder(this)
-                .setTitle(R.string.title_run_command)
-                .setView(input)
-                .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(R.string.action_run_command_confirm, (dialog, which) -> {
-                    TerminalSession session = getCurrentSession();
-                    String command = input.getText().toString().trim();
-                    if (session == null || command.isEmpty()) return;
-                    byte[] data = (command + "\\n").getBytes(java.nio.charset.StandardCharsets.UTF_8);
-                    session.write(data, 0, data.length);
-                    getDrawer().closeDrawers();
-                })
-                .show();
-        });
-    }
-
-    private void setDrawerStatusView() {
-        DrawerLayout drawer = getDrawer();
-        drawer.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
-            @Override
-            public void onDrawerOpened(@NonNull View drawerView) {
-                updateDrawerStatus();
-            }
-        });
-        updateDrawerStatus();
-    }
-
-    private void updateDrawerStatus() {
-        View statusView = findViewById(R.id.termuxitty_session_status);
-        if (statusView == null) return;
-
-        TerminalSession session = getCurrentSession();
-        if (session == null) {
-            ((android.widget.TextView) statusView).setText(R.string.termuxitty_session_status_unknown);
-            return;
-        }
-
-        String cwd = session.getCwd();
-        if (cwd == null || cwd.isEmpty()) cwd = "~";
-        String status = getString(R.string.termuxitty_session_status,
-            mTermuxService != null ? mTermuxService.getTermuxSessionsSize() : 1,
-            session.getPid(), cwd);
-        ((android.widget.TextView) statusView).setText(status);
-    }
 
     @SuppressLint("RtlHardcoded")
     @Override

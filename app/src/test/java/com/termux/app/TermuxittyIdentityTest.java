@@ -12,4 +12,9 @@ public class TermuxittyIdentityTest {
     public void appNameIsTermuxitty() {
         assertEquals("Termuxitty", TermuxConstants.TERMUX_APP_NAME);
     }
+
+    @Test
+    public void packageNameIsIndependentFromTermux() {
+        assertEquals("com.ttymux", TermuxConstants.TERMUX_PACKAGE_NAME);
+    }
 }
